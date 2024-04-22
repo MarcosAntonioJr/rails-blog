@@ -1,7 +1,11 @@
 <h1> my blog </h1>
 
 <% @posts.each do |post| %>
+
   <h2><%= link_to post.title, post %></h2>
   <p><%= post.body %></p>
   <p><%= post.created_at %> </p>
+
 <% end %>
+
+<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
