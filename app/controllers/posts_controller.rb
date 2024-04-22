@@ -3,7 +3,7 @@ class PostsController < ApplicationController
   before_action :set_post, except: [:index, :new, :create]
 
   def index
-    @posts = Post.order(created_at: :desc)
+    @posts = Post.includes(:comments).order(created_at: :desc)
     @pagy, @posts = pagy(@posts)
   end
 
@@ -25,7 +25,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
@@ -48,7 +47,7 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.includes(:comments).find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to root_path
   end

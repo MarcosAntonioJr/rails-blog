@@ -1,0 +1,17 @@
+<%= form_with(model: [post, post.comments.build], local: true) do |form| %>
+    <% if form.object.errors.any? %>
+      <div>
+          <% form.object.errors.full_messages.each do |msg| %>
+             <div> <%= msg %> </div>
+          <% end %>
+      </div>
+    <% end %>
+
+  <div>
+    <%= form.label :content %>
+    <%= form.text_area :content %>
+  </div>
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

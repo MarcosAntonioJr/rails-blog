@@ -6,6 +6,30 @@
   <p><%= post.body %></p>
   <p><%= post.created_at %> </p>
 
+  <button onclick="toggleComments(<%= post.id %>)">Ver Comentários</button>
+    
+  <div id="comments-container-<%= post.id %>" style="display: none;">
+  <h2> Comentários: </h2>  
+  <div class="comments">
+      <% post.comments.each do |comment| %>
+        <p><%= comment.content %></p>
+        <p><%= comment.created_at %></p>
+      <% end %>
+    </div>
+    <%= render 'comments/form', post: post %>
+  </div>
+
 <% end %>
 
 <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
+
+<script>
+function toggleComments(postId) {
+  var element = document.getElementById('comments-container-' + postId);
+  if (element.style.display === 'none') {
+    element.style.display = 'block';
+  } else {
+    element.style.display = 'none';
+  }
+}
+</script>
