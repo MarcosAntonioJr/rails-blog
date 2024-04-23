@@ -1,25 +1,27 @@
-<h1> my blog </h1>
+<h1>  </h1>
 
-<% @posts.each do |post| %>
-
-  <h2><%= link_to post.title, post %></h2>
-  <p><%= post.body %></p>
-  <p><%= post.created_at %> </p>
-
-  <button onclick="toggleComments(<%= post.id %>)">Ver Comentários</button>
-    
-  <div id="comments-container-<%= post.id %>" style="display: none;">
-  <h2> Comentários: </h2>  
-  <div class="comments">
-      <% post.comments.each do |comment| %>
-        <p><%= comment.content %></p>
-        <p><%= comment.created_at %></p>
-      <% end %>
-    </div>
-    <%= render 'comments/form', post: post %>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+<div class="container">
+  <a class="navbar-brand" href="/">My Blog</a>
+  <div class="navbar-nav ml-auto">
+    <a class="nav-item nav-link" href="/users/sign_in">Log in</a>
+    <a class="nav-item nav-link" href="/users/sign_up">Sign up</a>
   </div>
-
+</div>
+</nav>
+<div class="container mt-4">
+<% @posts.each do |post| %>
+  <div class="card mb-3">
+    <div class="card-body">
+      <h5 class="card-title"><%= post.title %></h5>
+      <h6 class="card-subtitle mb-2 text-muted">Publicado às <%= post.created_at.strftime("%H:%M") %></h6>
+      <p class="card-text"><%= post.body %></p>
+      <%= link_to 'Ver Comentários', post, class: 'btn btn-primary' %>
+      <!-- Incluir lógica para mostrar comentários aqui -->
+    </div>
+  </div>
 <% end %>
+</div>
 
 <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3pV0n4W3eKj2SAG29LPbBE6UbQXVDJS5p4laSSRxZI6n1tCh1bAqeIhsKo" crossorigin="anonymous">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   </head>
 
@@ -20,8 +20,6 @@
         <%= link_to 'Profile', edit_user_registration_path %>
         <%= button_to 'Logout', destroy_user_session_path, method: :get %>
       <% else %>
-        <%= link_to 'Log in', new_user_session_path %>
-        <%= link_to 'Sign up', new_user_registration_path %>
         <% end %>
     </div>
 

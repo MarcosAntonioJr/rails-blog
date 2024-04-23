@@ -73,5 +73,7 @@ end
 
 gem "devise", "~> 4.9"
 
-
 gem "pagy", "~> 8.2"
+
+gem 'bootstrap', '~> 5.1.3'
+
