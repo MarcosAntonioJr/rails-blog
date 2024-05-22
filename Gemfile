@@ -77,3 +77,12 @@ gem "pagy", "~> 8.2"
 
 gem 'bootstrap', '~> 5.1.3'
 
+gem 'pundit', '~> 2.1'
+
+gem 'carrierwave', '~> 2.0'
+
+gem 'mini_magick', '~> 4.11'
+
+
+
+

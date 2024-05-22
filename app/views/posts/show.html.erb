@@ -10,4 +10,9 @@
 <% @post.comments.each do |comment| %>
     <p><%= comment.content %></p>
     <p><%= comment.created_at %> </p>
+
+<p>
+    <strong>imagem:</strong>
+    <%= image_tag @post.image.url if @post.image? %>
+</p>
 <% end %>

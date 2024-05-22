@@ -52,4 +52,8 @@ class PostsController < ApplicationController
     redirect_to root_path
   end
 
+  def post_params
+    params.require(:post).permit(:title, :body, :image)
+  end
+
 end
