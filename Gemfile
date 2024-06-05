@@ -86,8 +86,3 @@ gem 'mini_magick', '~> 4.11'
 gem 'jquery-rails', '~> 4.4'
 
 gem 'webpacker' 
-
-
-
-
-
