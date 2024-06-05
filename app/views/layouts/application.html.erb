@@ -7,22 +7,35 @@
     <%= csp_meta_tag %>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3pV0n4W3eKj2SAG29LPbBE6UbQXVDJS5p4laSSRxZI6n1tCh1bAqeIhsKo" crossorigin="anonymous">
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "custom", media: "all" %>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <div class="container">
+        <a class="navbar-brand" href="/">My Blog</a>
+        <div class="navbar-nav ml-auto">
+          <% if user_signed_in? %>
+            <a class="nav-item nav-link" href="<%= new_post_path %>">New post</a>
+            <a class="nav-item nav-link" href="<%= edit_user_registration_path %>">Profile</a>
+            <%= button_to 'Logout', destroy_user_session_path, method: :delete, class: 'btn btn-link nav-item nav-link' %>
+          <% else %>
+            <a class="nav-item nav-link" href="<%= new_user_session_path %>">Log in</a>
+            <a class="nav-item nav-link" href="<%= new_user_registration_path %>">Sign up</a>
+          <% end %>
+        </div>
+      </div>
+    </nav>
 
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
-    <div> 
-      <% if user_signed_in? %>
-        <%= link_to 'New post', new_post_path %>
-        <%= link_to 'Profile', edit_user_registration_path %>
-        <%= button_to 'Logout', destroy_user_session_path, method: :get %>
-      <% else %>
-        <% end %>
+    <div class="container mt-5">
+      <%= yield %>
     </div>
 
-    <%= yield %>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js" integrity="sha384-pzjw8f+ua7Kw1TIq5z8pvK2BRi6LfuDAK67U2CXM/6zO2y4MIMF86W43v43R5pMn" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgQP6xGChxK7EEX57IcKMdz6a1Fj/uj0CSK/UzGzsBOeX9uA5e8" crossorigin="anonymous"></script>
   </body>
 </html>

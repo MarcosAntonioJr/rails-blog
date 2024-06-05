@@ -1,37 +1,45 @@
-<h1>  </h1>
+<h1 class="my-4"></h1>
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-<div class="container">
-  <a class="navbar-brand" href="/">My Blog</a>
-  <div class="navbar-nav ml-auto">
-    <a class="nav-item nav-link" href="/users/sign_in">Log in</a>
-    <a class="nav-item nav-link" href="/users/sign_up">Sign up</a>
-  </div>
-</div>
-</nav>
-<div class="container mt-4">
-<% @posts.each do |post| %>
-  <div class="card mb-3">
-    <div class="card-body">
-      <h5 class="card-title"><%= post.title %></h5>
-      <h6 class="card-subtitle mb-2 text-muted">Publicado às <%= post.created_at.strftime("%H:%M") %></h6>
-      <p class="card-text"><%= post.body %></p>
-      <%= link_to 'Ver Comentários', post, class: 'btn btn-primary' %>
-      <!-- Incluir lógica para mostrar comentários aqui -->
+  <div class="container">
+    <a class="navbar-brand" href="/">My Blog</a>
+    <div class="navbar-nav ml-auto">
+      <% if user_signed_in? %>
+        <a class="nav-item nav-link" href="/users/edit">Profile</a>
+        <%= link_to 'Logout', destroy_user_session_path, method: :delete, class: 'nav-item nav-link' %>
+      <% else %>
+        <a class="nav-item nav-link" href="/users/sign_in">Log in</a>
+        <a class="nav-item nav-link" href="/users/sign_up">Sign up</a>
+      <% end %>
     </div>
   </div>
-<% end %>
+</nav>
+
+<div class="container mt-4">
+  <% @posts.each do |post| %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title"><%= post.title %></h5>
+        <h6 class="card-subtitle mb-2 text-muted">Publicado às <%= post.created_at.strftime("%H:%M") %></h6>
+        <p class="card-text"><%= post.body %></p>
+        <% if post.image? %>
+          <%= image_tag post.image.url, class: "img-fluid" %>
+        <% end %>
+        <%= link_to 'Ver Comentários', post, class: 'btn btn-primary mt-3' %>
+      </div>
+    </div>
+  <% end %>
+
+  <%== pagy_nav(@pagy) if @pagy.pages > 1 %>
 </div>
 
-<%== pagy_nav(@pagy) if @pagy.pages > 1 %>
-
 <script>
-function toggleComments(postId) {
-  var element = document.getElementById('comments-container-' + postId);
-  if (element.style.display === 'none') {
-    element.style.display = 'block';
-  } else {
-    element.style.display = 'none';
+  function toggleComments(postId) {
+    var element = document.getElementById('comments-container-' + postId);
+    if (element.style.display === 'none') {
+      element.style.display = 'block';
+    } else {
+      element.style.display = 'none';
+    }
   }
-}
 </script>
