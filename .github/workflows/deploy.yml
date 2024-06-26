@@ -43,4 +43,3 @@ jobs:
           docker stop myapp || true
           docker rm myapp || true
           docker run -d --name myapp -p 3000:3000 --link myapp-db:db ${{ secrets.DOCKER_USERNAME }}/myapp:latest
-EOF
